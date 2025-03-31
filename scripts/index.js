@@ -4,10 +4,18 @@ window.onload=function() {
     const password = document.getElementById("password");
     const btnLogin = document.getElementById("btnLogin");
 
-    const login = () => {
-        if (username.value === "paladin" && password.value === "1234") {
-            sessionStorage.setItem("name", "Paladin")
-            window.location = "./pages/home.html";
+    const login = async () => {
+        const user =  {username: username.value, password: password.value};
+        const res = await fetch("http://localhost:4000/login/", {
+            method: "POST",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify(user)
+        });
+        const data = await res.json();
+        if (data.loggedIn) {
+            sessionStorage.setItem("id", data.user.user_id);
+            sessionStorage.setItem("name", data.user.first_name);
+            window.location = "./pages/home.html?id=" + data.user.user_id;
         } else {
             alert("Wrong username or password");
         }

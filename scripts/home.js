@@ -23,7 +23,7 @@ const send = document.getElementById("sendBtn");
 function sendMsg(){
         chat.value += "\n" + msg.value;
         msg.value ="";
-    
+        chat.scrollTop = chat.scrollHeight;
 }
 
 send.addEventListener("click", sendMsg);
