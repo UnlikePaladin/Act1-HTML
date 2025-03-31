@@ -6,7 +6,7 @@ window.onload=function() {
 
     const login = async () => {
         const user =  {username: username.value, password: password.value};
-        const res = await fetch("http://localhost:4000/login/", {
+        const res = await fetch("http://localhost:5000/login/", {
             method: "POST",
             headers: {"content-type": "application/json"},
             body: JSON.stringify(user)
